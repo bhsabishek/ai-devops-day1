@@ -1,0 +1,59 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 312B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.12-slim
+#2 DONE 1.2s
+
+#3 [1/5] FROM docker.io/library/python:3.12-slim
+#3 CACHED
+
+#4 [2/5] WORKDIR /app
+#4 CACHED
+
+#5 [3/5] COPY requirements.txt .
+#5 DONE 0.1s
+
+#6 [4/5] RUN pip install --no-cache-dir -r requirements.txt
+#6 2.341 Collecting flask==3.0.0
+#6 2.512   Downloading flask-3.0.0-py3-none-any.whl (99 kB)
+#6 2.890 Collecting psycopg2==2.9.9
+#6 3.010   Downloading psycopg2-2.9.9.tar.gz (384 kB)
+#6 3.402   Preparing metadata (setup.py): started
+#6 3.789   Preparing metadata (setup.py): finished with status 'error'
+#6 3.795   error: subprocess-exited-with-error
+#6 3.795
+#6 3.795   × python setup.py egg_info did not run successfully.
+#6 3.795   │ exit code: 1
+#6 3.795   ╰─> [23 lines of output]
+#6 3.795       running egg_info
+#6 3.795       Error: pg_config executable not found.
+#6 3.795
+#6 3.795       pg_config is required to build psycopg2 from source.  Please add the directory
+#6 3.795       containing pg_config to the $PATH or specify the full executable path with the
+#6 3.795       option:
+#6 3.795
+#6 3.795           python setup.py build_ext --pg-config /path/to/pg_config build ...
+#6 3.795
+#6 3.795       If you prefer to avoid building psycopg2 from source, please install the PyPI
+#6 3.795       'psycopg2-binary' package instead.
+#6 3.795       [end of output]
+#6 3.801 error: metadata-generation-failed
+#6 ERROR: process "/bin/sh -c pip install --no-cache-dir -r requirements.txt" did not complete successfully: exit code: 1
+------
+ > [4/5] RUN pip install --no-cache-dir -r requirements.txt:
+3.795       'psycopg2-binary' package instead.
+3.795       [end of output]
+3.801 error: metadata-generation-failed
+------
+Dockerfile:7
+--------------------
+   5 |     COPY requirements.txt .
+   6 |
+   7 | >>> RUN pip install --no-cache-dir -r requirements.txt
+   8 |
+   9 |     COPY . .
+--------------------
+ERROR: failed to solve: process "/bin/sh -c pip install --no-cache-dir -r requirements.txt" did not complete successfully: exit code: 1
